@@ -1,9 +1,8 @@
-class Album 
+class Album
   attr_reader :id, :name
-
+  attr_accessor :name
   @@albums = {}
-
-  @@total_rows = 0 
+  @@total_rows = 0
 
   def initialize(name, id)
     @name = name
@@ -14,7 +13,7 @@ class Album
     @@albums.values()
   end
 
-  def save 
+  def save
     @@albums[self.id] = Album.new(self.name, self.id)
   end
 
@@ -27,11 +26,26 @@ class Album
     @@total_rows = 0
   end
 
-  def update(name)
-    @name = name
+  def self.find(id)
+    @@albums[id]
   end
 
-  def delete
+  def update(name)
+    self.name = name
+    @@albums[self.id] = Album.new(self.name, self.id)
+  end
+
+  def delete()
     @@albums.delete(self.id)
   end
 end
+
+def self.search(name)
+  @@albums.each do |album| 
+    if album[i].name == name
+      return album[i]
+    else
+      "no albums match your search"
+    end  
+  end
+end 

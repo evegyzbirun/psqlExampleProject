@@ -4,6 +4,7 @@ require('./lib/album')
 require('pry')
 also_reload('lib/**/*.rb')
 
+
 get('/') do 
   @albums = Album.all
   erb(:albums)
@@ -20,6 +21,7 @@ end
 
 post('/albums') do
   name = params[:album_name]
+
   album = Album.new(name, nil)
   album.save()
   @albums = Album.all() 
@@ -36,16 +38,18 @@ get('/albums/:id/edit') do
   erb(:edit_album)
 end
 
-patch('/albums/:id') do 
+patch('/albums/:id') do
   if params[:name] != ""
     @album = Album.find(params[:id].to_i())
-    @abum.update(params[:name])
+    @album.update(params[:name])
   end
-  @albums = Album.allerb(:albums)
+  @albums = Album.all
+  erb(:albums)
 end
+
 delete('/albums/:id') do
   @album = Album.find(params[:id].to_i())
-  @albums.delete()
-  @album = Album.all
+  @album.delete()
+  @albums = Album.all
   erb(:albums)
 end
