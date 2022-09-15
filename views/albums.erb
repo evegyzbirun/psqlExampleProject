@@ -9,8 +9,21 @@
     <% end %>
   </ul>
 <% else %>
-  <p> We're all sold out , try back some other time </p>
+  <p> there is no albums to show </p>
 <% end %>
+
+<h3>Records Sold :</h3>
+
+<% if @albums_sold.any? %>
+  <ul>
+    <% @albums_sold.each do |album| %>
+      <li><a href="/albums/<%= album.id %>"><%= album.name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p> there is no albums to show </p>
+<% end %>
+
 
 <a href="/albums/new">Add a new album</a>
 
@@ -25,3 +38,5 @@
 <br>
 <br>
 <p>for store info: <a href="/albums/info">click here</a></p>
+
+

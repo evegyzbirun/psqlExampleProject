@@ -11,9 +11,18 @@ get('/') do
 end
 
 get('/albums') do 
-  @albums = Album.all
+  if params["search"]
+    @albums = Album.search_name(params[:search])
+  else
+    @albums = Album.all
+    @albums_sold = Album.all_sold()
+  end
   erb(:albums)
 end
+
+#if /albums?search=(params[:name]) == name to one of names in the list
+# ==
+#/albums/id
 
 get('/albums/new') do
   erb(:new_album)
@@ -28,12 +37,22 @@ post('/albums') do
   album = Album.new(name, nil)
   album.save()
   @albums = Album.all() 
+  @albums_sold = Album.all_sold()
   erb(:albums)
 end
 
 get('/albums/:id') do
   @album = Album.find(params[:id].to_i())
   erb(:album)
+end
+
+# we are working on this one 
+post('/albums/:id') do
+  @album = Album.find(params[:id].to_i())
+  @album.buy_album()
+  @albums_sold = Album.all_sold()
+  @albums = Album.all() 
+  erb(:albums)
 end
 
 get('/albums/:id/edit') do
