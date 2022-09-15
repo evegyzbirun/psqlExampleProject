@@ -19,9 +19,12 @@ get('/albums/new') do
   erb(:new_album)
 end
 
+get('/albums/info') do 
+  erb(:info_album)
+end
+
 post('/albums') do
   name = params[:album_name]
-
   album = Album.new(name, nil)
   album.save()
   @albums = Album.all() 
@@ -53,3 +56,4 @@ delete('/albums/:id') do
   @albums = Album.all
   erb(:albums)
 end
+

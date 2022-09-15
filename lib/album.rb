@@ -39,13 +39,4 @@ class Album
     @@albums.delete(self.id)
   end
 end
-
-def self.search(name)
-  @@albums.each do |album| 
-    if album[i].name == name
-      return album[i]
-    else
-      "no albums match your search"
-    end  
-  end
-end 
+ 
