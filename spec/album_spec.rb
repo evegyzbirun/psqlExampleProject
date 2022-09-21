@@ -15,11 +15,11 @@ describe '#Album' do
 
   describe('#save') do 
     it("saves an album") do 
-      album = Album.new("Giant Steps",nil)
-      album.save()
+      album1 = Album.new("Giant Steps",nil)
+      album1.save()
       album2 = Album.new("Blue", nil)
       album2.save()
-      expect(Album.all).to(eq([album2, album]))
+      expect(Album.all).to(eq([album2, album1]))
     end
   end
 
@@ -31,46 +31,32 @@ describe '#Album' do
     end
   end
 
-
-    describe('.clear') do
-      it("clears all albums") do
-        album = Album.new("Giant Steps", nil)
-        album.save()
-        album2 = Album.new("Blue", nil)
-        album2.save()
-        Album.clear()
-        expect(Album.all).to(eq([]))
-      end
-    end
-    describe('#update') do
-      it("updates an album by id") do
-        album = Album.new("Giant Steps", nil)
-        album.save()
-        album.update("A Love Supreme")
-        expect(album.name).to(eq("A Love Supreme"))
-      end
-    end
-    describe('#delete') do
-      it("deletes an album by id") do
-        album = Album.new("Giant Steps", nil)
-        album.save()
-        album2 = Album.new("Blue", nil)
-        album2.save()
-        album.delete()
-        expect(Album.all).to(eq([album2]))
-      end
-    end
-
-  describe('#songs') do
-    it("returns an album's songs") do
+  describe('.clear') do
+    it("clears all albums") do
       album = Album.new("Giant Steps", nil)
       album.save()
-      song = Song.new("Naima", album.id, nil)
-      song.save()
-      song2 = Song.new("Cousin Mary", album.id, nil)
-      song2.save()
-      expect(album.songs).to(eq([song, song2]))
+      album2 = Album.new("Blue", nil)
+      album2.save()
+      Album.clear()
+      expect(Album.all).to(eq([]))
+    end
+  end
+  describe('#update') do
+    it("updates an album by id") do
+      album = Album.new("Giant Steps", nil)
+      album.save()
+      album.update("A Love Supreme")
+      expect(album.name).to(eq("A Love Supreme"))
+    end
+  end
+  describe('#delete') do
+    it("deletes an album by id") do
+      album = Album.new("Giant Steps", nil)
+      album.save()
+      album2 = Album.new("Blue", nil)
+      album2.save()
+      album.delete()
+      expect(Album.all).to(eq([album2]))
     end
   end
 end
-pj was here 
