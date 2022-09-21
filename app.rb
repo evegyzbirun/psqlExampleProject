@@ -7,6 +7,7 @@ also_reload('lib/**/*.rb')
 
 get('/') do 
   @albums = Album.all
+  @albums_sold = Album.all_sold()
   erb(:albums)
 end
 
@@ -66,6 +67,7 @@ patch('/albums/:id') do
     @album.update(params[:name])
   end
   @albums = Album.all
+  @albums_sold = Album.all_sold()
   erb(:albums)
 end
 
@@ -73,6 +75,7 @@ delete('/albums/:id') do
   @album = Album.find(params[:id].to_i())
   @album.delete()
   @albums = Album.all
+  @albums_sold = Album.all_sold()
   erb(:albums)
 end
 

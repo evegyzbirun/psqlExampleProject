@@ -1,3 +1,4 @@
+
 class Album
   attr_reader :id, :name
   attr_accessor :name
@@ -51,6 +52,10 @@ class Album
   def buy_album()
     @@albums.delete(self.id)
     @@albums_sold[self.id] = Album.new(self.name, self.id)
+  end
+
+  def songs 
+    Song.find_by_album(self.id)
   end
 end
  

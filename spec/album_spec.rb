@@ -19,7 +19,7 @@ describe '#Album' do
       album.save()
       album2 = Album.new("Blue", nil)
       album2.save()
-      expect(Album.all).to(eq([album, album2]))
+      expect(Album.all).to(eq([album2, album]))
     end
   end
 
@@ -29,6 +29,8 @@ describe '#Album' do
       album2 = Album.new("Blue", nil)
       expect(album).to(eq(album2))
     end
+  end
+
 
     describe('.clear') do
       it("clears all albums") do
@@ -58,5 +60,17 @@ describe '#Album' do
         expect(Album.all).to(eq([album2]))
       end
     end
+
+  describe('#songs') do
+    it("returns an album's songs") do
+      album = Album.new("Giant Steps", nil)
+      album.save()
+      song = Song.new("Naima", album.id, nil)
+      song.save()
+      song2 = Song.new("Cousin Mary", album.id, nil)
+      song2.save()
+      expect(album.songs).to(eq([song, song2]))
+    end
   end
 end
+pj was here 
