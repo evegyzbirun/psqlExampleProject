@@ -17,3 +17,11 @@
 </form>
 
 <a href="/albums/<%= @song.album.id %>">Back to <%= @song.album.name %></a>
+
+<form action="/albums/<%= @album.id %>/songs" method="post">
+  <div class="form-group">
+    <label for="song_name">Song name</label>
+    <input id="song_name" name="song_name" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn btn-success">Add song</button>
+</form>
