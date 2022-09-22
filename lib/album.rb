@@ -1,4 +1,3 @@
-
 class Album
   attr_reader :id, :name
   attr_accessor :name

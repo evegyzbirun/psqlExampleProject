@@ -31,12 +31,11 @@ get('/albums/info') do
 end
 
 post('/albums') do
+  binding.pry
   name = params[:album_name]
   album = Album.new(name, nil)
   album.save()
-  @albums = Album.all() 
-  @albums_sold = Album.all_sold()
-  erb(:albums)
+  redirect to('/albums')
 end
 
 get('/albums/:id') do
@@ -63,9 +62,9 @@ patch('/albums/:id') do
     @album = Album.find(params[:id].to_i())
     @album.update(params[:name])
   end
-  @albums = Album.all
-  @albums_sold = Album.all_sold()
-  erb(:albums)
+    @albums = Album.all
+    @albums_sold = Album.all_sold()
+    erb(:albums)
 end
 
 delete('/albums/:id') do

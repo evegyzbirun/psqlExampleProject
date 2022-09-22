@@ -1,13 +1,12 @@
 <h2>Song: <%= @song.name %></h2>
 <h3>Album: <%= @song.album.name %></h3>
 
-<form action="/albums/<%= @song.album.id %>/songs/<%= @song.id %>" method="post">
-  <input name="_method" type="hidden" value="patch">
-
-  <label for="name">Rename song</label>
-  <input id="name" name="name" type="text">
-
-  <button type="submit" class="btn btn-success">Update song</button>
+<form action="/albums/<%= @album.id %>/songs" method="post">
+  <div class="form-group">
+    <label for="song_name">Song name</label>
+    <input id="song_name" name="song_name" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn btn-success">Add song</button>
 </form>
 
 <form action="/albums/<%= @song.album.id %>/songs/<%= @song.id %>" method="post">

@@ -12,12 +12,16 @@ class Lyrics
     @id = attributes.fetch(:id) || @@total_rows += 1
   end
 
+  def ==(lyrics_to_compare)
+    (self.lyrics() == lyrics_to_compare.lyrics()) && (self.album_id() == lyrics_to_compare.album_id()) && (self.song_id() == lyrics_to_compare.song_id())
+  end
+
   def self.all 
     @@lyrics.values
   end
 
   def save 
-    @@lyrics[self.id] = Lyrics.new(:lytics => self.lyrics, :album_id=>self.album_id , :song_id => self.song_id,:id => self.id)
+    @@lyrics[self.id] = Lyrics.new(:lyrics => self.lyrics, :album_id=>self.album_id , :song_id => self.song_id,:id => self.id)
   end
 
   def self.find(id)
@@ -28,7 +32,7 @@ class Lyrics
     self.lyrics = lyrics
     self.song_id = song_id
     self.album_id = album_id
-    @@lyrics[self.id] = Lyrics.new(:lytics => self.lyrics, :album_id => self.album_id, :song_id => self.song_id, :id => self.id)
+    @@lyrics[self.id] = Lyrics.new(:lyrics => self.lyrics, :album_id => self.album_id, :song_id => self.song_id, :id => self.id)
   end
 
   def delete 
