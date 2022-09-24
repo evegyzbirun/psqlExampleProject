@@ -31,7 +31,6 @@ get('/albums/info') do
 end
 
 post('/albums') do
-  binding.pry
   name = params[:album_name]
   album = Album.new(name, nil)
   album.save()
