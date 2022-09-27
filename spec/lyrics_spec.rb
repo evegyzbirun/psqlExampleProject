@@ -1,14 +1,11 @@
-require 'rspec'
+# require('spec_helper')
 require 'song'
 require 'album'
-require 'pry'
 require 'lyrics'
 
 describe '#Lyrics' do
 
   before(:each) do
-    Album.clear()
-    Song.clear()
     Lyrics.clear()
     @album = Album.new("Giant Steps", nil)
     @album.save()

@@ -1,12 +1,8 @@
-require 'rspec'
+require('spec_helper')
 require 'album'
 
 describe '#Album' do 
   
-  before(:each) do
-    Album.clear()
-
-  end
   describe('.all') do 
     it("returns an ampty array when there are no albums") do 
       expect(Album.all).to(eq([]))
