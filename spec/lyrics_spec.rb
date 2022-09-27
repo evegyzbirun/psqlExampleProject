@@ -1,7 +1,7 @@
 # require('spec_helper')
-require 'song'
-require 'album'
-require 'lyrics'
+# require 'song'
+# require 'album'
+# require 'lyrics'
 
 # describe '#Lyrics' do
 
