@@ -1,17 +1,22 @@
 class Album
-  attr_reader :id, :name
+  attr_reader :id
   attr_accessor :name
-  @@albums = {}
-  @@albums_sold = {}
-  @@total_rows = 0
+ 
 
-  def initialize(name, id)
-    @name = name
-    @id = id || @@total_rows += 1
+  def initialize(attributes)
+    @name = attributes.fetch(:name) #must to be same in tables in DB
+    @id = attributes.fetch(:id) # Note that this line has been changed.
   end
 
   def self.all
-    @@albums.values().sort { |a, b| a.name.downcase <=> b.name.downcase }
+    returned_albums = DB.exec("SELECT * FROM albums;")
+    albums = []
+    returned_albums.each() do |album|
+      name = album.fetch("name")
+      id = album.fetch("id").to_i
+      albums.push(Album.new({:name => name, :id => id}))
+    end
+    albums
   end
 
   def self.all_sold
@@ -19,7 +24,8 @@ class Album
   end
 
   def save
-    @@albums[self.id] = Album.new(self.name, self.id)
+    result = DB.exec("INSERT INTO albums (name) VALUES ('#{@name}') RETURNING id;")
+    @id = result.first().fetch("id").to_i
   end
 
   def ==(album_to_compare)
@@ -27,21 +33,23 @@ class Album
   end
 
   def self.clear
-    @@albums = {}
-    @@total_rows = 0
+    DB.exec("DELETE FROM albums *;")
   end
 
   def self.find(id)
-    @@albums[id]
+    album = DB.exec("SELECT * FROM albums WHERE id = #{id};").first
+    name = album.fetch("name")
+    id = album.fetch("id").to_i
+    Album.new({:name => name, :id => id})
   end
 
   def update(name)
-    self.name = name
-    @@albums[self.id] = Album.new(self.name, self.id)
+    @name = name
+    DB.exec("UPDATE albums SET name = '#{@name}' WHERE id = #{@id};")
   end
 
-  def delete()
-    @@albums.delete(self.id)
+  def delete
+    DB.exec("DELETE FROM albums WHERE id = #{@id};")
   end
 
   def self.search_name(name)

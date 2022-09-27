@@ -6,7 +6,9 @@ require('pry')
 require("pg")
 also_reload('lib/**/*.rb')
 
+# Don't forget to include accurate setup instructions in your README.md!
 
+DB = PG.connect({:dbname => "record_store", :password => ENV['DATABASE_PASS']})
 
 DB = PG.connect({:dbname => "record_store"})
 
