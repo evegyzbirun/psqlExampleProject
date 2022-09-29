@@ -4,8 +4,9 @@ require 'album'
 require 'song'
 require('artist')
 require 'pry'
+require ('dotenv/load')
 
-DB = PG.connect({:dbname => 'record_store_test', :password => 'epicodus'})
+DB = PG.connect({:dbname => 'record_store_test', :password => ENV['DATABASE_PASS']})
 
 
 RSpec.configure do |config|

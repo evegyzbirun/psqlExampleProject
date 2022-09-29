@@ -16,11 +16,11 @@
 
 <form action="/albums/<%= @album.id %>/songs" method="post">
   <div class="form-group">
-    <label for="song_name">Song name</label>
-    <input id="song_name" name="song_name" class="form-control" type="text">
+    <label for="artist_name">Song name</label>
+    <input id="artist_name" name="artist_name" class="form-control" type="text">
   </div>
-  <button type="submit" class="btn btn-success">Add song</button>
+  <button type="submit" class="btn btn-success">Add artist</button>
 </form>
 
-<p><a href="/albums/<%= @album.id %>/edit">Edit album</a></p>
-<p><a href="/albums">Return to album list</a></p>
+<p><a href="/albums/<%= @album.id %>/edit">Edit artist</a></p>
+<p><a href="/albums">Return to artists list</a></p>

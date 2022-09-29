@@ -4,12 +4,12 @@ require('./lib/album')
 require('./lib/song')
 require('pry')
 require("pg")
-require('dotenv')
+require ('dotenv/load')
 also_reload('lib/**/*.rb')
 
 # Don't forget to include accurate setup instructions in your README.md!
 
-DB = PG.connect({:dbname => "record_store", :password => 'epicodus'})
+DB = PG.connect({:dbname => "record_store", :password => ENV['DATABASE_PASS']})
 
 
 get('/') do
@@ -83,4 +83,24 @@ delete('/albums/:id/songs/:song_id') do
   song.delete
   @album = Album.find(params[:id].to_i())
   erb(:album)
+end
+
+get('/artists') do
+  @artists = Artist.all
+  erb(:artists)
+end
+
+get('/artists/new') do
+  erb(:artists_new)
+end
+
+get('/artists/:artist_id') do
+  @artist = Artist.find(params[:artist_id].to_i())
+  erb(:artist)
+end
+
+post('/artists') do
+  @artist = Artist.new(name: params[:artist_name], id: nil)
+  @artist.save()
+  redirect to('/artists')
 end
