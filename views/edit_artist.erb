@@ -1,0 +1,19 @@
+<h1>Update <%= @artist.name() %></h1>
+
+<form action="/artists/<%= @artist.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+
+  <label for="name">Rename artist</label>
+  <input id="name" name="name" type="text">
+
+  <button type="submit" class="btn btn-success">Update</button>
+</form>
+
+<p><a href="/artists">Return to album list</a></p>
+
+
+<form action="/artists/<%= @artist.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+
+  <button type="submit" class="btn btn-danger">Delete artist</button>
+</form>

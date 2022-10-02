@@ -1,7 +1,7 @@
 <h1>All Sales Vinyl</h1>
 
 <h2>Artists</h2>
-<% if @artists.any? %>
+<% if @artists %>
   <ul>
     <% @artists.each do |artists| %>
       <li><a href="/artists/<%= artists.id %>"><%= artists.name %></a></li>
@@ -13,5 +13,6 @@
 
 
 <a href="/artists/new">Add a new artists</a>
-
+<p><a href="/albums">Return to albums list</a></p>
+<p><a href="/artists">Return to artists list</a></p>
 
